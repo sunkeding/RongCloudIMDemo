@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '27'
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 2018010415
+        versionName "2.8.26 Stable"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            resources.srcDirs = ['src/main/java']
+            renderscript.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            jni.srcDirs = []
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['Rong_IMKit.jar'], dir: 'src/main/libs')
+    //    compile 'com.android.support:support-v4:27.0.0'
+    compile project(':IMLib')
+    implementation files('src/main/libs/AMap_2DMap_V2.9.0_20160525.jar')
+    implementation files('src/main/libs/AMap_Channel_Location_V1.4.0_20160708.jar')
+    implementation files('src/main/libs/AMap_Search_V3.4.0_20160811.jar')
+}
+
+repositories { flatDir { dirs '../push/aars' }
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+}
